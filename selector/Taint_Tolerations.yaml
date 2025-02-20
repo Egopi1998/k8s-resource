@@ -1,0 +1,19 @@
+kind: pod
+apiVersion: v1
+metadata: 
+  name: nginx
+  labels:
+    app: nginx
+    env: test
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: Always
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "expense"
+      effect: "NoSchedule"
+
+# kubectl taint nodes node1 project=expense:NoSchedule

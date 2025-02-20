@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hellandhaven
+data:
+  course: "DevOps with AWS"
+  trainer: "sivakumar"
+  github: "https://github.com/Egopi1998"
+# kubectl create -f 08-config-map.yaml
+# kubectl get configmap
+# kubectl describe configmap hellandhaven
+# kubectl get configmap hellandhaven -o yaml
+# kubectl get configmap hellandhaven -o json
+# kubectl get configmap hellandhaven -o jsonpath='{.data.course}'

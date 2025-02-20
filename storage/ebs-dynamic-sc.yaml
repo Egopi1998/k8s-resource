@@ -1,0 +1,10 @@
+# storage class
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: expense-ebs
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain  #Retain (default) Safe option, Delete, or Recycle
+volumeBindingMode: WaitForFirstConsumer # WaitForFirstConsumer (default), Immediate
+
+#

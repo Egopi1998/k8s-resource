@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: hellandhaven #all config in 
+      # env:
+      #   - name: COURSE
+      #     valueFrom:
+      #       configMapRefKey:
+      #         name: daws78s # name of the configMap
+      #         Key: course # value of this key will store COURSE
+      #   - name: GITHUB
+      #     valueFrom:
+      #       configMapRefKey:
+      #         name: daws78s # name of the configMap
+      #         Key: github # value of this key will store GITHUB

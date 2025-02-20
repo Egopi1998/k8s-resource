@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-dynamic
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-92107410 #give your file system id
+  basePath: "/expense" #used to create a directory in the EFS volume and mount it to the pod
+  directoryPerms: "777" #permissions for the directory

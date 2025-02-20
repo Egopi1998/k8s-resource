@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend # this is the label of the replica set
+spec:
+  # modify replicas according to your case and replica will only concetrate to maintain the number of pods so it don't care about the if there any update in pod
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: frontend # this should match to the label of the pod
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

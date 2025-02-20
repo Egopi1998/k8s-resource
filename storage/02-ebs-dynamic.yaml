@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic-claim
+spec:
+  accessModes:
+  - ReadWriteOnce 
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: "expense-ebs" # If storageClassName is not set, it will use the default storage class of the cluster to create the volume 
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-dynamic-claim
+  labels:
+    app: ebs-dynamic-claim
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1c # select the node in the same zone as the EBS volume
+spec:
+  containers:
+  - name: ebs-dynamic-container
+    image: nginx
+    volumeMounts:
+    - name: ebs-dynamic-claim
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: ebs-dynamic-claim
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebs-dynamic-service
+spec:
+  selector:
+    app: ebs-dynamic-pod
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
